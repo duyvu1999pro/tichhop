@@ -20,8 +20,7 @@ namespace Admin
         public Menu()
         {          
             InitializeComponent();
-            // Login formlog = new Login();
-            // call_form(formlog);
+         
            
         }
       
@@ -34,16 +33,19 @@ namespace Admin
                     board_main.Controls.Clear();
                     Orders formOrders = new Orders();
                     call_form(formOrders);
+                    label_pos.Text = "Đơn hàng";
                     break;
                 case "product":
                     board_main.Controls.Clear();
                     Product formProduct = new Product();
                     call_form(formProduct);
+                    label_pos.Text = "Sản phẩm";
                     break;              
                 case "customer":
                     board_main.Controls.Clear();
                     Customer formCustomer = new Customer();
                     call_form(formCustomer);
+                    label_pos.Text = "Khách hàng";
                     break;
             }
             }
@@ -214,47 +216,44 @@ namespace Admin
       
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            panel_choice.Enabled = true;
-            board_main.Controls.Clear();
-            Orders formOrders = new Orders();
-            call_form(formOrders);
-            //using (var client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri(baseAddress);
-            //    QUANTRI account = new QUANTRI
-            //    {
-            //        SDT = tk.Text.Trim(),
-            //        MatKhau = mk.Text.Trim()
-            //    };
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseAddress);
+                QUANTRI account = new QUANTRI
+                {
+                    SDT = tk.Text.Trim(),
+                    MatKhau = mk.Text.Trim()
+                };
 
 
-            //    var resp = client.PostAsJsonAsync("quantri/check", account);
-            //    resp.Wait();
-            //    var rs = resp.Result;
+                var resp = client.PostAsJsonAsync("quantri/check", account);
+                resp.Wait();
+                var rs = resp.Result;
 
-            //    if (rs.IsSuccessStatusCode)
-            //    {
-            //        var readTask = rs.Content.ReadAsAsync<string>();
-            //        WELCOME.Text = "Hi, Admin: " + readTask.Result;
+                if (rs.IsSuccessStatusCode)
+                {
+                    var readTask = rs.Content.ReadAsAsync<string>();
+                    WELCOME.Text = "Hi, Admin: " + readTask.Result;
 
-            //        panel_choice.Enabled = true;
-            //        board_main.Controls.Clear();
-            //        Orders formOrders = new Orders();
-            //        call_form(formOrders);
+                    panel_choice.Enabled = true;
+                    board_main.Controls.Clear();
+                    Orders formOrders = new Orders();
+                    call_form(formOrders);
+                    label_pos.Text = "Đơn hàng";
 
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Error occured! Please try again.");
+                }
+                else
+                {
+                    MessageBox.Show("Error occured! Please try again.");
 
-            //    }
+                }
 
-            //}
+            }
 
         }
+
+
         #endregion
-
-
-      
     }
 }

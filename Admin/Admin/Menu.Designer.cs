@@ -46,6 +46,7 @@
             this.product = new System.Windows.Forms.Button();
             this.orders = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label_pos = new System.Windows.Forms.Label();
             this.board_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -154,6 +155,7 @@
             // board_bar
             // 
             this.board_bar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(248)))), ((int)(((byte)(250)))));
+            this.board_bar.Controls.Add(this.label_pos);
             this.board_bar.Controls.Add(this.resize_but);
             this.board_bar.Controls.Add(this.exit_but);
             this.board_bar.Controls.Add(this.WELCOME);
@@ -303,6 +305,16 @@
             this.panel5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.board_bar_MouseMove);
             this.panel5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.board_bar_MouseUp);
             // 
+            // label_pos
+            // 
+            this.label_pos.AutoSize = true;
+            this.label_pos.Font = new System.Drawing.Font("Courier New", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_pos.Location = new System.Drawing.Point(583, 39);
+            this.label_pos.Name = "label_pos";
+            this.label_pos.Size = new System.Drawing.Size(88, 24);
+            this.label_pos.TabIndex = 24;
+            this.label_pos.Text = "Notice";
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -348,5 +360,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button customer;
+        private System.Windows.Forms.Label label_pos;
     }
 }
