@@ -12,6 +12,56 @@ namespace api_shop_ban_thuoc_btl_cnltth_2020.Controllers.API
     [RoutePrefix("api/product")]
     public class ProductController : ApiController
     {
+        WebService1 service = new WebService1();
+     
+        [HttpGet]
+        [Route("getData/{kind}")]
+        public IHttpActionResult GetData(string kind)
+        {
+            DataTable data = new DataTable();        
+            SqlCommand cmd = new SqlCommand("select *from SANPHAM where MaDM=" + kind);
+            if (!ModelState.IsValid)
+                return BadRequest();
+            service.pushDataTable(cmd, data);
+            return Json(data);
+        }
+       
+        [HttpGet]
+        [Route("getView/{kind}")]
+        public IHttpActionResult GetView(string kind)
+        {
+            DataTable data = new DataTable();
+           
+                SqlCommand cmd = new SqlCommand("select MaSP,TenSP from SANPHAM where MaDM=" + kind);
+                service.pushDataTable(cmd, data);
+                                   
+            if (!ModelState.IsValid)
+                return BadRequest();           
+            return Json(data);
+        }
+        private bool idHasExist(string id)
+        {
+            MyDBContext db = new MyDBContext();
+            SANPHAM temp = db.SANPHAMs.Find(id);
+            if (temp == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public string autoID()
+        {
+            MyDBContext db = new MyDBContext();                       
+            string id = "1";
+            int temp = Convert.ToInt32(id);
+            while (idHasExist(id)==true)
+            {
+                temp++;
+            }
+            id = temp.ToString();
+            return id;
+        }
         //lấy tất cả thuốc
         // GET: api/Thuoc
         [HttpGet]
@@ -80,6 +130,7 @@ namespace api_shop_ban_thuoc_btl_cnltth_2020.Controllers.API
             try
             {
                 MyDBContext context = new MyDBContext();
+                thuoc.MaSP = autoID();
                 context.SANPHAMs.Add(thuoc);
                 context.SaveChanges();
                 return true;
@@ -119,9 +170,12 @@ namespace api_shop_ban_thuoc_btl_cnltth_2020.Controllers.API
                 if (Thuoc == null) return false;
                 Thuoc.TenSP = thuoc.TenSP;
                 Thuoc.ThanhPhan = thuoc.ThanhPhan;
-                //Thuoc.SoLuongTon = thuoc.SoLuongTon;
-                Thuoc.MaDM = thuoc.MaDM;
+                Thuoc.CongDung = thuoc.CongDung;                            
                 Thuoc.LieuLuong = thuoc.LieuLuong;
+                Thuoc.DonVi = thuoc.DonVi;
+                Thuoc.MaDM = thuoc.MaDM;
+                Thuoc.DangThuoc = thuoc.DangThuoc;
+                Thuoc.GiaBan = thuoc.GiaBan;
                 Thuoc.HinhAnh = thuoc.HinhAnh;
                 Thuoc.MoTa = thuoc.MoTa;
                 context.SaveChanges();

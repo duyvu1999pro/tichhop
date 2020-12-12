@@ -1,4 +1,5 @@
-﻿using System;
+﻿using api_shop_ban_thuoc_btl_cnltth_2020.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -48,6 +49,33 @@ namespace api_shop_ban_thuoc_btl_cnltth_2020
             finally { connection.Close(); }
 
         }
+        public bool SelectHasRow(string query)
+        {
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(query);
+                command.Connection = connection;
+                command.CommandType = CommandType.Text;
+                SqlDataReader dataread = command.ExecuteReader();
+                if (dataread.HasRows)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { connection.Close(); }
+
+        }
         public void ExecuteProcedure(SqlCommand cmd)
         {
             try
@@ -69,5 +97,13 @@ namespace api_shop_ban_thuoc_btl_cnltth_2020
             }
 
         }
+        public string FirstKind()
+        {
+            MyDBContext db = new MyDBContext();
+            string id = "";
+            SANPHAM a = db.SANPHAMs.FirstOrDefault();
+            return a.MaDM.ToString();
+        }
+        
     }
 }

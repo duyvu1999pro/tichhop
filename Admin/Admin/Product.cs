@@ -15,35 +15,46 @@ namespace Admin
 {
     public partial class Product : Form
     {
-        DBAccess model = new DBAccess();
-        SqlCommand cmd;
+        public string baseAddress = Function.GetUri();    
         DataTable data = new DataTable();
         string id_temp = "";
         public Product()
         {
             InitializeComponent();
-            loadComboBox();
-           
-        }
-
-        private void Product_Load(object sender, EventArgs e)
-        {
-
+            loadComboBox();         
         }
         #region Load
         private void loadComboBox()
         {
-            model.pushComboBox(@"select *from DANHMUC", kind, "MaDM", "TenDM");
+            DataTable table = new DataTable();           
+            table = Function.GetDataTable("danhmuc/getData");
+            Function.pushComboBox(table, kind, "MaDM", "TenDM");          
         }
         private void loadGridview()
         {
+            
             data = new DataTable();
-            cmd = new SqlCommand("select *from SANPHAM where MaDM=" + kind.SelectedValue.ToString());
-            model.pushDataTable(cmd, data);
-            model.pushGridview("select MaSP,TenSP from SANPHAM where MaDM=" + kind.SelectedValue.ToString(), gridView);
+            data = Function.GetDataTableWithValue("product/getData", kind.SelectedValue.ToString());
+            if (Function.HasRow(data))
+            {
+                gridView.DataSource = Function.GetDataTableWithValue("product/getView", kind.SelectedValue.ToString());                           
+            }
+            else
+            {
+                for (int i = gridView.Rows.Count-1; i >= 0; i--)
+                {
+                    gridView.Rows.RemoveAt(i);
+                                     
+                }
+            }
+               
+            
+            
+
         }
         #endregion
-        #region changeForm
+        #region hiệu ứng
+                
         private void clear()
         {
             tenthuoc.Clear();
@@ -105,53 +116,53 @@ namespace Admin
         }
         private void them(object sender, EventArgs e)
         {
-            // if (condition())@MaSP INT,
-                // {
-                cmd = new SqlCommand("InsertSANPHAM");
-                cmd.Parameters.AddWithValue("@MaSP", model.autoIDSANPHAM("SANPHAM"));
-                cmd.Parameters.AddWithValue("@MaDM", kind.SelectedValue.ToString());
-                cmd.Parameters.AddWithValue("@TenSP", tenthuoc.Text);
-                cmd.Parameters.AddWithValue("@ThanhPhan", thanhphan.Text);
-                cmd.Parameters.AddWithValue("@CongDung", congdung.Text);
-                cmd.Parameters.AddWithValue("@LieuLuong", lieuluong.Text);
-                cmd.Parameters.AddWithValue("@DonVi", donvi.Text);
-                cmd.Parameters.AddWithValue("@DangThuoc", dangthuoc.Text);
-                cmd.Parameters.AddWithValue("@HinhAnh", urlanh.Text);
-                cmd.Parameters.AddWithValue("@MoTa", mota.Text);
-                cmd.Parameters.AddWithValue("@GiaBan", dongia.Text);
-                
-                
-                model.ExecuteProcedure(cmd);
+             if (condition())
+                 {
+               
+                SANPHAM sp = new SANPHAM();
+                sp.MaDM = Convert.ToInt32(kind.SelectedValue.ToString());
+                sp.TenSP = tenthuoc.Text;
+                sp.ThanhPhan = thanhphan.Text;
+                sp.CongDung  = congdung.Text;
+                sp.LieuLuong = lieuluong.Text;
+                sp.DonVi     = donvi.Text;
+                sp.DangThuoc = dangthuoc.Text;
+                sp.HinhAnh   = urlanh.Text;
+                sp.MoTa      = mota.Text;
+                sp.GiaBan    = Convert.ToInt32(dongia.Text);
+                Function.Add("product/addthuoc", sp);
+         
             clear();
                 loadGridview();
-           // }
+           }
 
         }
         private void sua(object sender, EventArgs e)
         {
-           // if (condition())
-           // {
-                cmd = new SqlCommand("UpdateSANPHAM");
-                cmd.Parameters.AddWithValue("@id", id_temp);
-            cmd.Parameters.AddWithValue("@TenSP", tenthuoc.Text);
-            cmd.Parameters.AddWithValue("@ThanhPhan", thanhphan.Text);
-            cmd.Parameters.AddWithValue("@CongDung", congdung.Text);
-            cmd.Parameters.AddWithValue("@LieuLuong", lieuluong.Text);
-            cmd.Parameters.AddWithValue("@DonVi", donvi.Text);
-            cmd.Parameters.AddWithValue("@DangThuoc", dangthuoc.Text);
-            cmd.Parameters.AddWithValue("@HinhAnh", urlanh.Text);
-            cmd.Parameters.AddWithValue("@MoTa", mota.Text);
-            cmd.Parameters.AddWithValue("@GiaBan", dongia.Text);
-            model.ExecuteProcedure(cmd);
-                AddForm();
+            if (condition())
+            {
+
+                SANPHAM sp = new SANPHAM();
+                sp.MaSP = id_temp;
+                sp.MaDM = Convert.ToInt32(kind.SelectedValue.ToString());
+                sp.TenSP = tenthuoc.Text;
+                sp.ThanhPhan = thanhphan.Text;
+                sp.CongDung = congdung.Text;
+                sp.LieuLuong = lieuluong.Text;
+                sp.DonVi = donvi.Text;
+                sp.DangThuoc = dangthuoc.Text;
+                sp.HinhAnh = urlanh.Text;
+                sp.MoTa = mota.Text;
+                sp.GiaBan = Convert.ToInt32(dongia.Text);
+                Function.Edit("product/updatethuoc", sp);
+           
+            AddForm();
                 loadGridview();
-          //  }
+            }
         }
         private void xoa(object sender, EventArgs e)
         {
-            cmd = new SqlCommand("DeleteSANPHAM");
-            cmd.Parameters.AddWithValue("@id", id_temp);
-            model.ExecuteProcedure(cmd);
+            Function.Delete("product/delthuoc", id_temp);          
             AddForm();
             loadGridview();
         }
@@ -198,8 +209,8 @@ namespace Admin
         private void kind_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadGridview();
-            AddForm();
-            if (!model.SelectHasRow("select *from SANPHAM where MaDM=" + kind.SelectedValue.ToString()))
+            AddForm();        
+            if (!Function.HasRow(data))                              
             {
                 kind_del.Visible = true;
             }
@@ -207,27 +218,24 @@ namespace Admin
             {
                 kind_del.Visible = false;
             }
-
+         
 
 
         }
 
         private void del_kind(object sender, EventArgs e)
-        {
-            cmd = new SqlCommand("DeleteDANHMUC");
-            cmd.Parameters.AddWithValue("@id", kind.SelectedValue.ToString());
-            model.ExecuteProcedure(cmd);
+        {          
+            Function.Delete("danhmuc/deldanhmuc", kind.SelectedValue.ToString());            
             loadComboBox();
 
         }
         private void add_kind(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && text_add.Text != "")
-            {
-                cmd = new SqlCommand("InsertDANHMUC");
-               
-                cmd.Parameters.AddWithValue("@ten", text_add.Text);
-                model.ExecuteProcedure(cmd);
+            {              
+                DANHMUC dm = new DANHMUC();
+                dm.TenDM = text_add.Text;
+                Function.Add("danhmuc/adddanhmuc", dm);
                 text_add.Clear();
                 text_add.Visible = false;
                 kind_add.Text = "+";               
@@ -235,7 +243,13 @@ namespace Admin
                
             }
         }
+            #endregion
+            #region Điều kiện
+            private bool condition()
+            {
+                //
+                return true;
+            }
         #endregion
-      
     }
-}
+    }

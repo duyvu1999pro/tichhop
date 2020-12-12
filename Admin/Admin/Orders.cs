@@ -15,6 +15,8 @@ namespace Admin
         public Orders()
         {
             InitializeComponent();
+            DataTable temp = new DataTable();
+            gridView.DataSource = temp;
         }
     }
 }

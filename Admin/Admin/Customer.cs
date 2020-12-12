@@ -15,9 +15,7 @@ namespace Admin
 {
     public partial class Customer : Form
     {
-        public string baseAddress = "https://localhost:44373/api/";
-        //DBAccess model = new DBAccess();
-        //SqlCommand cmd;
+        public string baseAddress = Function.GetUri();       
         DataTable data = new DataTable();
         string id_temp = "";
         public Customer()
@@ -26,30 +24,12 @@ namespace Admin
             loadGridview();    
         }
         #region Load
-        private DataTable GetDataTable(string request)
-        {
-            DataTable temp = new DataTable();        
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(baseAddress);
-                var resp = client.GetAsync(request);
-                resp.Wait();
-                var rs = resp.Result;
-                if (rs.IsSuccessStatusCode)
-                {
-                    var readTask = rs.Content.ReadAsAsync<DataTable>();
-                    readTask.Wait();
-                    return readTask.Result;
-                }              
-                return temp;
-            }
-        }
+       
         private void loadGridview()
         {
             data = new DataTable();         
-            data = GetDataTable("khachhang/getData");
-            gridView.DataSource = GetDataTable("khachhang/getView");
-          //  model.pushGridview("select MaKH,HoTen from KHACHHANG;", gridView);
+            data = Function.GetDataTable("khachhang/getData");
+            gridView.DataSource = Function.GetDataTable("khachhang/getView");        
         }
         #endregion
         #region changeForm
@@ -106,15 +86,7 @@ namespace Admin
             }
         }
         private void them(object sender, EventArgs e)
-        {
-
-            //cmd = new SqlCommand("InsertKHACHHANG");
-            //cmd.Parameters.AddWithValue("@SDT", sdt.Text);
-            //cmd.Parameters.AddWithValue("@HoTen", ten.Text);
-            //cmd.Parameters.AddWithValue("@Email", email.Text);
-            //cmd.Parameters.AddWithValue("@MatKhau", matkhau.Text);
-            //cmd.Parameters.AddWithValue("@Diachi", diachi.Text);
-            //   model.ExecuteProcedure(cmd);
+        {           
             if(condition())
             {    
             KHACHHANG kh = new KHACHHANG();
@@ -123,17 +95,7 @@ namespace Admin
             kh.Email = email.Text;
             kh.MatKhau = matkhau.Text;
             kh.Diachi = diachi.Text;
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(baseAddress);
-                var resp = client.PostAsJsonAsync("khachhang/addkhachhang", kh);
-                resp.Wait();
-                var rs = resp.Result;
-                //if (rs.IsSuccessStatusCode)
-                //    MessageBox.Show("Add Success.");
-                //else
-                //    MessageBox.Show("Error");
-            }          
+                Function.Add("khachhang/addkhachhang", kh);                
             clear();
             loadGridview();
              }
@@ -143,17 +105,7 @@ namespace Admin
         {
              if (condition())
              {
-            //cmd = new SqlCommand("UpdateKHACHHANG");
-            //cmd.Parameters.AddWithValue("@MaKH", id_temp);
-            //cmd.Parameters.AddWithValue("@SDT", sdt.Text);
-            //cmd.Parameters.AddWithValue("@HoTen", ten.Text);
-            //cmd.Parameters.AddWithValue("@Email", email.Text);
-            //cmd.Parameters.AddWithValue("@MatKhau", matkhau.Text);
-            //cmd.Parameters.AddWithValue("@Diachi", diachi.Text);
-            //model.ExecuteProcedure(cmd);
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(baseAddress);
+               
                 KHACHHANG kh = new KHACHHANG();
                 kh.MaKH = Convert.ToInt32(id_temp);
                 kh.SDT = sdt.Text;
@@ -161,34 +113,14 @@ namespace Admin
                 kh.Email = email.Text;
                 kh.MatKhau = matkhau.Text;
                 kh.Diachi = diachi.Text;
-                var putTask = client.PutAsJsonAsync("khachhang/updateKhachHang", kh).Result;
-                //if (putTask.IsSuccessStatusCode)               
-                //    MessageBox.Show("Update Success.");                  
-                
-                //else
-                //    MessageBox.Show("Error");
-                
-            }
+                Function.Edit("khachhang/updateKhachHang", kh);               
             AddForm();
             loadGridview();
               }
         }
         private void xoa(object sender, EventArgs e)
-        {
-            //cmd = new SqlCommand("DeleteKHACHHANG");
-            //cmd.Parameters.AddWithValue("@id", id_temp);
-            //model.ExecuteProcedure(cmd);
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(baseAddress);
-                var deleteTask = client.DeleteAsync("khachhang/delKhachHang/" + id_temp).Result;
-
-               // if (deleteTask.IsSuccessStatusCode)               
-               //     MessageBox.Show("Delete Success.");                                
-               // else
-               //MessageBox.Show("Error");
-              
-            }
+        {           
+            Function.Delete("khachhang/delKhachHang", id_temp);         
             AddForm();
             loadGridview();
         }

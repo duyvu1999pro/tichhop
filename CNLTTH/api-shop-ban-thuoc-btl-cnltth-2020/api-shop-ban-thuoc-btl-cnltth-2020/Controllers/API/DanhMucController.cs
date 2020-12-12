@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -12,6 +14,20 @@ namespace api_shop_ban_thuoc_btl_cnltth_2020.Controllers.API
     [RoutePrefix("api/danhmuc")]
     public class DanhMucController : ApiController
     {
+
+        WebService1 service = new WebService1();
+     
+        [HttpGet]
+        [Route("getData")]
+        public IHttpActionResult GetData()
+        {
+            DataTable data = new DataTable();
+            SqlCommand cmd = new SqlCommand("select *from DANHMUC");
+            if (!ModelState.IsValid)
+                return BadRequest();
+            service.pushDataTable(cmd, data);
+            return Json(data);
+        }
         //lấy tất cả danh mục
         // GET: api/danhmuc
         [HttpGet]
