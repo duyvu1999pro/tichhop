@@ -32,23 +32,23 @@
             this.board_main = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.mk = new System.Windows.Forms.TextBox();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.tk = new System.Windows.Forms.TextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btnLogin = new System.Windows.Forms.Button();
             this.board_bar = new System.Windows.Forms.Panel();
             this.resize_but = new System.Windows.Forms.Button();
             this.exit_but = new System.Windows.Forms.Button();
             this.WELCOME = new System.Windows.Forms.Label();
             this.panel_choice = new System.Windows.Forms.FlowLayoutPanel();
-            this.orders = new System.Windows.Forms.Button();
-            this.product = new System.Windows.Forms.Button();
             this.customer = new System.Windows.Forms.Button();
+            this.product = new System.Windows.Forms.Button();
+            this.orders = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.board_main.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.board_bar.SuspendLayout();
             this.panel_choice.SuspendLayout();
             this.SuspendLayout();
@@ -91,6 +91,24 @@
             this.mk.TabIndex = 18;
             this.mk.Text = "123";
             // 
+            // btnLogin
+            // 
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(92)))), ((int)(((byte)(89)))));
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(114)))), ((int)(((byte)(174)))));
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnLogin.ForeColor = System.Drawing.Color.White;
+            this.btnLogin.Location = new System.Drawing.Point(350, 212);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(293, 60);
+            this.btnLogin.TabIndex = 23;
+            this.btnLogin.Text = "Đăng nhập";
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
             // tk
             // 
             this.tk.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
@@ -101,6 +119,16 @@
             this.tk.Size = new System.Drawing.Size(294, 42);
             this.tk.TabIndex = 17;
             this.tk.Text = "0359225275";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = global::Admin.Properties.Resources.user__1_;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox2.Location = new System.Drawing.Point(300, 65);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(45, 45);
+            this.pictureBox2.TabIndex = 22;
+            this.pictureBox2.TabStop = false;
             // 
             // label1
             // 
@@ -122,34 +150,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(45, 45);
             this.pictureBox1.TabIndex = 21;
             this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = global::Admin.Properties.Resources.user__1_;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox2.Location = new System.Drawing.Point(300, 65);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(45, 45);
-            this.pictureBox2.TabIndex = 22;
-            this.pictureBox2.TabStop = false;
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(92)))), ((int)(((byte)(89)))));
-            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogin.FlatAppearance.BorderSize = 0;
-            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(114)))), ((int)(((byte)(174)))));
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(350, 212);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(293, 60);
-            this.btnLogin.TabIndex = 23;
-            this.btnLogin.Text = "Đăng nhập";
-            this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // board_bar
             // 
@@ -226,27 +226,26 @@
             this.panel_choice.Size = new System.Drawing.Size(166, 616);
             this.panel_choice.TabIndex = 4;
             // 
-            // orders
+            // customer
             // 
-            this.orders.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
-            this.orders.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.orders.FlatAppearance.BorderSize = 0;
-            this.orders.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(218)))));
-            this.orders.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(71)))), ((int)(((byte)(77)))));
-            this.orders.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.orders.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.orders.ForeColor = System.Drawing.Color.White;
-            this.orders.Image = global::Admin.Properties.Resources.cungcap;
-            this.orders.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.orders.Location = new System.Drawing.Point(3, 135);
-            this.orders.Name = "orders";
-            this.orders.Size = new System.Drawing.Size(163, 60);
-            this.orders.TabIndex = 281;
-            this.orders.Text = "Đơn hàng";
-            this.orders.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.orders.UseVisualStyleBackColor = false;
-            this.orders.Visible = false;
-            this.orders.Click += new System.EventHandler(this.but_child_Click);
+            this.customer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
+            this.customer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.customer.FlatAppearance.BorderSize = 0;
+            this.customer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(218)))));
+            this.customer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(71)))), ((int)(((byte)(77)))));
+            this.customer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customer.Font = new System.Drawing.Font("Courier New", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customer.ForeColor = System.Drawing.Color.White;
+            this.customer.Image = global::Admin.Properties.Resources.customer;
+            this.customer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.customer.Location = new System.Drawing.Point(3, 3);
+            this.customer.Name = "customer";
+            this.customer.Size = new System.Drawing.Size(163, 60);
+            this.customer.TabIndex = 284;
+            this.customer.Text = "Khách hàng";
+            this.customer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.customer.UseVisualStyleBackColor = false;
+            this.customer.Click += new System.EventHandler(this.but_child_Click);
             // 
             // product
             // 
@@ -269,26 +268,26 @@
             this.product.UseVisualStyleBackColor = false;
             this.product.Click += new System.EventHandler(this.but_child_Click);
             // 
-            // customer
+            // orders
             // 
-            this.customer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
-            this.customer.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.customer.FlatAppearance.BorderSize = 0;
-            this.customer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(218)))));
-            this.customer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(71)))), ((int)(((byte)(77)))));
-            this.customer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customer.Font = new System.Drawing.Font("Courier New", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customer.ForeColor = System.Drawing.Color.White;
-            this.customer.Image = global::Admin.Properties.Resources.customer;
-            this.customer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.customer.Location = new System.Drawing.Point(3, 3);
-            this.customer.Name = "customer";
-            this.customer.Size = new System.Drawing.Size(163, 60);
-            this.customer.TabIndex = 284;
-            this.customer.Text = "Khách hàng";
-            this.customer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.customer.UseVisualStyleBackColor = false;
-            this.customer.Click += new System.EventHandler(this.but_child_Click);
+            this.orders.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
+            this.orders.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.orders.FlatAppearance.BorderSize = 0;
+            this.orders.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(218)))));
+            this.orders.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(71)))), ((int)(((byte)(77)))));
+            this.orders.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.orders.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.orders.ForeColor = System.Drawing.Color.White;
+            this.orders.Image = global::Admin.Properties.Resources.cungcap;
+            this.orders.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.orders.Location = new System.Drawing.Point(3, 135);
+            this.orders.Name = "orders";
+            this.orders.Size = new System.Drawing.Size(163, 60);
+            this.orders.TabIndex = 281;
+            this.orders.Text = "Đơn hàng";
+            this.orders.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.orders.UseVisualStyleBackColor = false;
+            this.orders.Click += new System.EventHandler(this.but_child_Click);
             // 
             // panel5
             // 
@@ -321,8 +320,8 @@
             this.Text = "Menu";
             this.board_main.ResumeLayout(false);
             this.board_main.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.board_bar.ResumeLayout(false);
             this.board_bar.PerformLayout();
             this.panel_choice.ResumeLayout(false);

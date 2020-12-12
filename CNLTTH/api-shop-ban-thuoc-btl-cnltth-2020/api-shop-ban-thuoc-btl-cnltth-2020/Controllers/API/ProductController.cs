@@ -13,7 +13,7 @@ namespace api_shop_ban_thuoc_btl_cnltth_2020.Controllers.API
     public class ProductController : ApiController
     {
         WebService1 service = new WebService1();
-     
+        
         [HttpGet]
         [Route("getData/{kind}")]
         public IHttpActionResult GetData(string kind)

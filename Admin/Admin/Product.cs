@@ -218,8 +218,8 @@ namespace Admin
             {
                 kind_del.Visible = false;
             }
-         
 
+            
 
         }
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -12,6 +14,51 @@ namespace api_shop_ban_thuoc_btl_cnltth_2020.Controllers.API
     [RoutePrefix("api/donhang")]
     public class DonHangController : ApiController
     {
+        WebService1 service = new WebService1();
+        [HttpGet]
+        [Route("getTT")]
+        public IHttpActionResult GetTT()
+        {
+            DataTable data = new DataTable();
+            SqlCommand cmd = new SqlCommand("select *from TRANGTHAIDONHANG;");
+            if (!ModelState.IsValid)
+                return BadRequest();
+            service.pushDataTable(cmd, data);
+            return Json(data);
+        }
+        [HttpGet]
+        [Route("getSP")]
+        public IHttpActionResult GetSP()
+        {
+            DataTable data = new DataTable();
+            SqlCommand cmd = new SqlCommand("select *from SANPHAM;");
+            if (!ModelState.IsValid)
+                return BadRequest();
+            service.pushDataTable(cmd, data);
+            return Json(data);
+        }
+        [HttpGet]
+        [Route("getData")]
+        public IHttpActionResult GetData()
+        {
+            DataTable data = new DataTable();
+            SqlCommand cmd = new SqlCommand("select *from DONHANG;");
+            if (!ModelState.IsValid)
+                return BadRequest();
+            service.pushDataTable(cmd, data);
+            return Json(data);
+        }
+        [HttpGet]
+        [Route("getView")]
+        public IHttpActionResult GetView()
+        {
+            DataTable data = new DataTable();
+            SqlCommand cmd = new SqlCommand("select MaDH,HoTen,NgayLap,TongTien from DONHANG;");
+            if (!ModelState.IsValid)
+                return BadRequest();
+            service.pushDataTable(cmd, data);
+            return Json(data);
+        }
         //lấy tất cả danh mục
         // GET: api/danhmuc
         [HttpGet]
