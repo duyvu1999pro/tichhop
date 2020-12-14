@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.board_bar = new System.Windows.Forms.Panel();
+            this.label_pos = new System.Windows.Forms.Label();
             this.resize_but = new System.Windows.Forms.Button();
             this.exit_but = new System.Windows.Forms.Button();
             this.WELCOME = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.product = new System.Windows.Forms.Button();
             this.orders = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.label_pos = new System.Windows.Forms.Label();
             this.board_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -76,9 +76,9 @@
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(92)))), ((int)(((byte)(89)))));
             this.label4.Location = new System.Drawing.Point(347, 45);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 20);
+            this.label4.Size = new System.Drawing.Size(115, 20);
             this.label4.TabIndex = 19;
-            this.label4.Text = "Tài khoản";
+            this.label4.Text = "Số điện thoại";
             // 
             // mk
             // 
@@ -167,6 +167,16 @@
             this.board_bar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.board_bar_MouseDown);
             this.board_bar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.board_bar_MouseMove);
             this.board_bar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.board_bar_MouseUp);
+            // 
+            // label_pos
+            // 
+            this.label_pos.AutoSize = true;
+            this.label_pos.Font = new System.Drawing.Font("Courier New", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_pos.Location = new System.Drawing.Point(583, 39);
+            this.label_pos.Name = "label_pos";
+            this.label_pos.Size = new System.Drawing.Size(88, 24);
+            this.label_pos.TabIndex = 24;
+            this.label_pos.Text = "Notice";
             // 
             // resize_but
             // 
@@ -304,16 +314,6 @@
             this.panel5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.board_bar_MouseDown);
             this.panel5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.board_bar_MouseMove);
             this.panel5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.board_bar_MouseUp);
-            // 
-            // label_pos
-            // 
-            this.label_pos.AutoSize = true;
-            this.label_pos.Font = new System.Drawing.Font("Courier New", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_pos.Location = new System.Drawing.Point(583, 39);
-            this.label_pos.Name = "label_pos";
-            this.label_pos.Size = new System.Drawing.Size(88, 24);
-            this.label_pos.TabIndex = 24;
-            this.label_pos.Text = "Notice";
             // 
             // Menu
             // 

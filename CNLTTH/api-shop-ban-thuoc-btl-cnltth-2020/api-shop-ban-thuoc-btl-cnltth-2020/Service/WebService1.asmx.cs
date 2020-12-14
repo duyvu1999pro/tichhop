@@ -1,6 +1,7 @@
 ﻿using api_shop_ban_thuoc_btl_cnltth_2020.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -19,21 +20,15 @@ namespace api_shop_ban_thuoc_btl_cnltth_2020
     // [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-        private static string conn = "Data Source = (local)\\MSSQLSERVER03;Database =SHOPBANTHUOCAPI2020; Integrated Security=SSPI;";
-
-        public static SqlConnection connection = new SqlConnection(conn);
-        private static SqlDataAdapter adapter;
-        private static SqlCommand command;
-        private static DataTable dataTable;
-        //[WebMethod]
-        //public string HelloWorld()
-        //{
-        //    return "Hello World";
-        //}
+        //private static string conn = "Data Source = (local)\\MSSQLSERVER03;Database =SHOPBANTHUOCAPI2020; Integrated Security=SSPI;";
+        private static string conn =System.Configuration.ConfigurationManager. ConnectionStrings["MyDBContext"].ConnectionString;
+        public static SqlConnection connection = new SqlConnection(conn); 
         public void pushDataTable(SqlCommand dbCommand, DataTable data)//đẩy dữ liệu vào dataTable
         {
+            
             try
             {
+
                 connection.Open();
                 dbCommand.Connection = connection;
                 dbCommand.CommandType = CommandType.Text;
@@ -49,61 +44,8 @@ namespace api_shop_ban_thuoc_btl_cnltth_2020
             finally { connection.Close(); }
 
         }
-        public bool SelectHasRow(string query)
-        {
-
-            try
-            {
-                connection.Open();
-                command = new SqlCommand(query);
-                command.Connection = connection;
-                command.CommandType = CommandType.Text;
-                SqlDataReader dataread = command.ExecuteReader();
-                if (dataread.HasRows)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally { connection.Close(); }
-
-        }
-        public void ExecuteProcedure(SqlCommand cmd)
-        {
-            try
-            {
-                connection.Open();
-                cmd.Connection = connection;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                connection.Close();
-
-            }
-
-        }
-        public string FirstKind()
-        {
-            MyDBContext db = new MyDBContext();
-            string id = "";
-            SANPHAM a = db.SANPHAMs.FirstOrDefault();
-            return a.MaDM.ToString();
-        }
+       
+     
         
     }
 }

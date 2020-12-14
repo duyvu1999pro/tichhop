@@ -67,6 +67,7 @@ namespace Admin
             urlanh.Clear();
             mota.Clear();
            
+           
         }
         private void AddForm()
         {
@@ -111,7 +112,7 @@ namespace Admin
                         break;
                     }
                 }
-
+               
             }
         }
         private void them(object sender, EventArgs e)

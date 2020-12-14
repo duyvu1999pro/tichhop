@@ -62,7 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBAccess.cs" />
     <Compile Include="Function.cs" />
     <Compile Include="Model\CHITIETDONHANG.cs" />
     <Compile Include="Customer.cs">
